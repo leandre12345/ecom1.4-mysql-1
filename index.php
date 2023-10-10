@@ -65,7 +65,7 @@ var_dump($data3);
 
 // récupérer toutes les lignes de la table user
 
-$result4 = mysqli_query($conn, "SELECT user_name, email, id FROM user WHERE id = 1");
+$result4 = mysqli_query($conn, "SELECT user_name, email, id FROM user");
 
 //$data4 = mysqli_fetch_assoc($result4);
 
