@@ -96,10 +96,10 @@ var_dump($result4);
 echo "</br></br>";
 var_dump($data4);*/
 
-$data4 = getAllUsersAssoc();
+/* $data4 = getAllUsersAssoc();
 
-//showData('Quatrieme fetch', $data4);
-/* echo'<ul>';
+showData('Quatrieme fetch', $data4);
+echo'<ul>';
 foreach ($data4 as $key => $value) {
 ?>
 
@@ -191,16 +191,47 @@ echo'</ul>'; */
 // les données pourraient venir par exemple de $_POST['email']
 
 $data7 = [
-    'user_name'=>'michel',
-    'email'=> 'michel@michel.ca', 
+    'user_name'=>'william',
+    'email'=> 'bill@bill.ca', 
     'pwd'=>''
 ];
 
 
 $newUser = createUser($data7);
 
+$users = getAllUsersAssoc();
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>
+<select name="user_id">
+<?php
+foreach ($users as $user) {
+    ?>
+
+    <option value="<?php echo $user['id']?>"><?php echo $user['user_name']?></option>
+
+<?php
+}
+?>
+
+</select>
+<?php
+
+showData('My users',$users);
 
 
 
