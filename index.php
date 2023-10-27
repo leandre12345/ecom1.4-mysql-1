@@ -201,8 +201,12 @@ $newUser = createUser($data7);
 
 $users = getAllUsersAssoc();
 
-
-
+$data8 = [
+    'id'=> 14,
+    'user_name'=>'william',
+    'email'=> 'bill@bill.ca', 
+    'pwd'=>''
+];
 
 
 
