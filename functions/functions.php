@@ -11,7 +11,7 @@ function selectUserByIdIndex($id)
     // récupérer une ligne dans user
     global $conn;
     $result = mysqli_query($conn, "SELECT * FROM user WHERE id = " . $id);
-    
+
     // avec fetch row : tableau indexé
     $data = mysqli_fetch_row($result);
 
@@ -74,41 +74,79 @@ function getAllUsersIndex()
     return $data;
 }
 
-function createUser($data) {
+function createUser($data)
+{
     global $conn;
+    /**
+     * Création du'une requete SQL préparée 
+     * en vue  d'une insertion 
+     */
     $query = "INSERT INTO user VALUES (NULL, ?, ?, ?)";
-    
 
-    /* $stmt = mysqli_prepare($link, "INSERT INTO table VALUES (?, ?, 100)"); // Query 1 
-    mysqli_stmt_bind_param($stmt, "si", $string, $integer);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt); */ // CLOSE $stmt
-
-
+    /**
+     * utilisation de la fonction php mysqli_prepare() 
+     * pour préparer la requete et créer le statement.
+     * Cela vérifie que la connexion est bonne 
+     * et que la requete est valide sur la DB utilisée
+     */
     if ($stmt = mysqli_prepare($conn, $query)) {
-
-        /* Lecture des marqueurs */
-        mysqli_stmt_bind_param($stmt, "sss",
-         $data['user_name'], $data['email'], $data['pwd']);
+        /** Lecture des marqueurs (les 3 "?" dans la query)
+         * Et on bind les param 
+         * en indiquant leur type ( s = string, i = integer)
+         * en donnant la valeur des param a inserer dans la DB ($data[key])
+         */
+        mysqli_stmt_bind_param(
+            $stmt,
+            "sss",
+            $data['user_name'],
+            $data['email'],
+            $data['pwd']
+        );
 
         /* Exécution de la requête */
         $result = mysqli_stmt_execute($stmt);
-        echo "</br></br>";
-        echo "Coucou je suis la";
-        echo "</br></br>";
-        var_dump($result);
-        echo "</br></br>";
-
-        /* Récupération des valeurs */
-        //mysqli_stmt_fetch($stmt);
-    
-    
-        /* Fermeture du traitement */
-        //mysqli_stmt_close($stmt);
     }
+}
 
+function updateUser($data)
+{
+    global $conn;
 
+    $query = "UPDATE user SET user_name = ?, email = ?, pwd = ?
+            WHERE user.id = ?;";
 
+    if ($stmt = mysqli_prepare($conn, $query)) {
 
+        mysqli_stmt_bind_param(
+            $stmt,
+            "sssi",
+            $data['user_name'],
+            $data['email'],
+            $data['pwd'],
+            $data['id'],
+        );
 
+        /* Exécution de la requête */
+        $result = mysqli_stmt_execute($stmt);
+    }
+}
+
+function deleteUser($id)
+{
+    global $conn;
+
+    $query = "DELETE FROM user
+            WHERE user.id = ?;";
+
+    if ($stmt = mysqli_prepare($conn, $query)) {
+
+        mysqli_stmt_bind_param(
+            $stmt,
+            "i",
+            $id,
+        );
+
+        /* Exécution de la requête */
+        $result = mysqli_stmt_execute($stmt);
+    }
 }
