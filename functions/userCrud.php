@@ -1,4 +1,11 @@
 <?php
+
+/* 
+On récupère les fonction sde type CRUD dans userCrud pour les regrouper et les trouver plus facilement en cas de changement nécessaire. 
+
+*/
+
+
 /**
  * Create user 
  * 
@@ -36,7 +43,10 @@ function createUser(array $data)
         $result = mysqli_stmt_execute($stmt);
     }
 }
-function getAllUsersAssoc()
+/**
+ * Get all
+  */
+function getAllUser()
 {
     global $conn;
     $result = mysqli_query($conn, "SELECT * FROM user");
@@ -58,7 +68,10 @@ function getAllUsersAssoc()
     return $data;
 }
 
-function selectUserByIdAssoc(int $id)
+/**
+ * Get all
+  */
+function getUserById(int $id)
 {
     global $conn;
     $result = mysqli_query($conn, "SELECT * FROM user WHERE id = " . $id);
@@ -68,7 +81,9 @@ function selectUserByIdAssoc(int $id)
 
     return $data;
 }
-
+/**
+ * Update user
+  */
 function updateUser(array $data)
 {
     global $conn;
@@ -91,11 +106,14 @@ function updateUser(array $data)
         $result = mysqli_stmt_execute($stmt);
     }
 }
-
+/**
+ * Delete user
+  */
 function deleteUser(int $id)
 {
     global $conn;
 
+    /* Query  permettant de delete un user en ayant juste son id */
     $query = "DELETE FROM user
                 WHERE user.id = ?;";
 
