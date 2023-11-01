@@ -1,6 +1,6 @@
 <?php
 require_once ('functions/functions.php');
-require_once "functions/crud.php";
+require_once "functions/userCrud.php";
 $server = 'localhost';
 $userName = "root";
 $pwd = "";
@@ -191,30 +191,30 @@ echo'</ul>'; */
 // les données pourraient venir par exemple de $_POST['email']
 
 $data7 = [
-    'user_name'=>'william',
-    'email'=> 'bill@bill.ca', 
+    'user_name'=>'michel',
+    'email'=> 'michou@bob.ca', 
     'pwd'=>''
 ];
 
 
-$newUser = createUser($data7);
+//$newUser = createUser($data7);
 
 $users = getAllUsersAssoc();
 
 $data8 = [
-    'id'=> 14,
-    'user_name'=>'william',
-    'email'=> 'bill@bill.ca', 
+    'id'=> 21,
+    'user_name'=>'Amine',
+    'email'=> 'amine@amine.ca', 
     'pwd'=>''
 ];
 
+updateUser($data8);
+
+$users = getAllUsersAssoc();
 
 
 
-
-
-
-
+deleteUser(6);
 
 
 
